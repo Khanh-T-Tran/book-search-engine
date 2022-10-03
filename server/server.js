@@ -19,8 +19,10 @@ const server = new ApolloServer({
   context: authMiddleware
 })
 
-//apply ApolloServer for our app as middleware
-// server.applyMiddleware({app});
+// Calls the server and applys the authMiddleware to the express application
+server.start().then(res => {
+  server.applyMiddleware({ app })
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,8 +38,8 @@ app.get('*', (req, res) => {
 
 app.use(routes);
 
-db.once('open', async () => {
-  await server.applyMiddleware({app});
+db.once('open', () => {
+  // await server.applyMiddleware({app});
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     // log where we can go to test our GQL API
