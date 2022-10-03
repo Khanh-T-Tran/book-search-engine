@@ -19,7 +19,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route path='/' element={<SearchBooks />} />
-            <Route path='/saved' element={<SavedBooks />} />
+            {/* <Route path='/saved' element={<SavedBooks />} /> */}
             <Route 
               path="*"
               element={<NotFound />}
